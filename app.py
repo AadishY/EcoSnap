@@ -90,7 +90,7 @@ Once identified, please classify the waste and provide comprehensive disposal an
 7. **Carbon Footprint Savings:** Provide an estimation of the carbon footprint savings achieved by correctly disposing of the waste. If possible, include numeric values to quantify the reduction in emissions or resource conservation. Keep this explanation brief but informative in short.
 (You may change the **title:** according to your need)
 
-**Important:** The bot is strictly programmed to address waste and garbage-related inquiries only. If the user poses questions unrelated to waste management or provides an irrelevant image, politely prompt them to focus on waste and garbage items. In cases where the image content and the provided waste name do not match, prioritize the image for analysis, but inform the user of the discrepancy before proceeding.
+**Important:** The bot is strictly programmed to address waste and garbage-related inquiries only. If the user poses questions unrelated to waste management or provides an irrelevant image, politely say them to focus on waste and garbage items.
 """
 
 # Button to submit
