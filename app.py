@@ -21,11 +21,11 @@ genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 # Function to get responses from the Gemini model
 def get_gemini_response(prompt, image):
     model = genai.GenerativeModel(
-        "gemini-1.5-pro-exp-0801",
+        "gemini-1.5-flash",
         generation_config=generation_config,
         system_instruction="You are a sophisticated waste classification assistant programmed and created by Aadish to analyze images of waste and provide detailed, accurate, and professional information related to waste management. Your primary goal is to assist users in understanding how to properly dispose of or utilize various types of waste, while also offering insights into environmental impact."
     )
-    
+    #gemini-1.5-flash, gemini-1.5-pro-exp-0801
     try:
         if image:
             response = model.generate_content([prompt, image])
@@ -93,7 +93,8 @@ with st.container():
 prompt = f"""
 Please analyze the uploaded image and identify the type of waste. If the garbage name provided below is empty, rely on the image to determine the waste type.
 
-**Garbage Name:** {input_text or 'Unknown Waste - Please analyze the image'}
+Garbage Name {input_text or 'Unknown Waste - Please analyze the image'}
+only answer the format questions
 
 Once identified, please classify the waste and provide comprehensive disposal and utilization instructions, you will not inlcude anything above you will just answer in the format given below, you may change the heading if you like, formatted as follows:
 
@@ -122,7 +123,7 @@ if submit:
     if not input_text and not uploaded_file:
         st.warning("Please provide either text input or an image before proceeding.")
     else:
-        with st.spinner("Aadish is thinking... 🧠"):
+        with st.spinner("EcoSnap is thinking... 🧠"):
             time.sleep(1)  # Simulate a delay for visual effect
             response = get_gemini_response(prompt, image)
 
