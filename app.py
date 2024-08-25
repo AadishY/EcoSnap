@@ -8,24 +8,43 @@ import time
 
 # Configuration for the generative model
 generation_config = {
-    "temperature": 0.9,
+    "temperature": 1,
     "top_p": 1,
     "max_output_tokens": 8192,
 }
 
-load_dotenv()  # Load environment variables from .env
+# Load environment variables from .env
+load_dotenv()
 
-# Configure Google API key
-genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+# Get API keys from environment variables
+api_keys = [
+    os.getenv("GOOGLE_API_KEY"),
+    os.getenv("GOOGLE_API_KEY1"),
+    os.getenv("GOOGLE_API_KEY2"),
+    # Add more keys as needed
+]
+
+# Function to configure the API key
+def configure_api_key(key_index):
+    if key_index < len(api_keys):
+        genai.configure(api_key=api_keys[key_index])
+    else:
+        st.error("All API keys have reached their limit. Please try again later.")
+        return False
+    return True
 
 # Function to get responses from the Gemini model
-def get_gemini_response(prompt, image):
+def get_gemini_response(prompt, image, key_index=0):
+    # Configure API key
+    if not configure_api_key(key_index):
+        return None
+# gemini-1.5-flash, gemini-1.5-pro-exp-0801, gemini-1.5-pro    
     model = genai.GenerativeModel(
-        "gemini-1.5-flash",
+        "gemini-1.5-pro",
         generation_config=generation_config,
-        system_instruction="You are a sophisticated waste classification assistant programmed and created by Aadish to analyze images of waste and provide detailed, accurate, and professional information related to waste management. Your primary goal is to assist users in understanding how to properly dispose of or utilize various types of waste, while also offering insights into environmental impact."
+        system_instruction="You are a sophisticated waste classification assistant programmed and created by Aadish to analyze images of waste and provide detailed, accurate, and professional information related to waste management. Your primary goal is to assist users in understanding how to properly dispose of or utilize various types of waste, while also offering insights into environmental impact. You will provide long answers."
     )
-    #gemini-1.5-flash, gemini-1.5-pro-exp-0801
+    
     try:
         if image:
             response = model.generate_content([prompt, image])
@@ -35,7 +54,12 @@ def get_gemini_response(prompt, image):
     except Exception as e:
         error_message = f"Error: {str(e)}"
         st.error(error_message)
-        return None
+        # If the error is due to the API limit, switch to the next key
+        if "limit" in str(e).lower() and key_index + 1 < len(api_keys):
+            st.info("Switching to the next API key...")
+            return get_gemini_response(prompt, image, key_index + 1)
+        else:
+            return None
 
 # Initialize the Streamlit app
 st.set_page_config(page_title="EcoSnap", layout="wide")
