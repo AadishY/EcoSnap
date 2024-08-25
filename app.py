@@ -29,7 +29,7 @@ def configure_api_key(key_index):
     if key_index < len(api_keys):
         genai.configure(api_key=api_keys[key_index])
     else:
-        st.error("All API keys have reached their limit. Please try again later.")
+        st.error("Bot is exhausted. Please try again later.")
         return False
     return True
 
