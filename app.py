@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 import os
 from PIL import Image
 import google.generativeai as genai
-from st_chat_message import message  # Import the message function
+from st-chat-message import message  # Import the message function
 generation_config = {
   "temperature": 0.9,
   "top_p": 1,
