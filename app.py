@@ -6,8 +6,8 @@ import google.generativeai as genai
 from streamlit_chat import message  # Import the message function
 
 generation_config = {
-    "temperature": 0.9,
-    "top_p": 1,
+    "temperature": 0.8,
+    "top_p": 0.8,
     "max_output_tokens": 8192,
 }
 
@@ -64,7 +64,7 @@ col1, col2 = st.columns([3, 2])
 
 # File uploader in col1, input box in col2
 with col1:
-    uploaded_file = st.file_uploader("", type=["jpg", "jpeg", "png"], key="image_upload")
+    uploaded_file = st.file_uploader("", type=["jpg", "jpeg", "png"], key="image_upload", label_visibility="collapsed")
 
 with col2:
     input_text = st.text_area("Input Prompt (Garbage Name): ", key="input")
