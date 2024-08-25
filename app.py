@@ -4,21 +4,25 @@ import os
 from PIL import Image
 import google.generativeai as genai
 from streamlit_chat import message  # Import the message function
+
 generation_config = {
-  "temperature": 0.9,
-  "top_p": 1,
-  "max_output_tokens": 8192,
+    "temperature": 0.9,
+    "top_p": 1,
+    "max_output_tokens": 8192,
 }
 
-load_dotenv()  # Take environment variables from .env.
+load_dotenv()  # Load environment variables from .env
 
 # Configure Google API key
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 # Function to load OpenAI model and get responses
 def get_gemini_response(prompt, image):
-    model = genai.GenerativeModel('gemini-1.5-pro-exp-0801', generation_config=generation_config, system_instruction="You are a sophisticated waste classification assistant programmed and created by Aadish to analyze images of waste and provide detailed, accurate, and professional information related to waste management. Your primary goal is to assist users in understanding how to properly dispose of or utilize various types of waste, while also offering insights into environmental impact. If you will give complete detailed answers") 
-    # "gemini-1.5-pro-exp-0801", "gemini-1.5-pro" "gemini-1.5-flash" "gemini-1.0-pro"
+    model = genai.GenerativeModel(
+        'gemini-1.5-pro-exp-0801',
+        generation_config=generation_config,
+        system_instruction="You are a sophisticated waste classification assistant programmed and created by Aadish to analyze images of waste and provide detailed, accurate, and professional information related to waste management. Your primary goal is to assist users in understanding how to properly dispose of or utilize various types of waste, while also offering insights into environmental impact. You will give complete detailed answers. And will not answer if the image/wastename is not a garbage/waste."
+    )
     
     try:
         if image:
@@ -27,8 +31,7 @@ def get_gemini_response(prompt, image):
             response = model.generate_content(prompt)
         return response.text
     except Exception as e:
-        error_message = f"Error: {str(e)}"
-        st.error(error_message)  # Display only the error message line
+        st.error(f"Error: {str(e)}")
         return None
 
 # Initialize the Streamlit app
@@ -40,13 +43,13 @@ st.markdown(
     """
     <style>
     .stTextArea textarea {
-        height: 75px !important;  /* Fixed height */
-        width: 80% !important;    /* Reduced width */
-        resize: none;             /* Disable manual resizing */
+        height: 75px !important;
+        width: 80% !important;
+        resize: none;
     }
     .stFileUploader {
-        height: 75px !important;  /* Fixed height */
-        width: 100% !important;   /* Full width for file uploader */
+        height: 75px !important;
+        width: 100% !important;
     }
     </style>
     """,
@@ -56,15 +59,15 @@ st.markdown(
 # Add label for both input types
 st.write("**Input or Upload Image**")
 
-# Create columns for input and file upload, using custom ratios
-col1, col2 = st.columns([3, 2])  # Adjust column width ratio as needed
+# Create columns for input and file upload
+col1, col2 = st.columns([3, 2])
 
-# Switch positions: file uploader in col1, input box in col2
+# File uploader in col1, input box in col2
 with col1:
-    uploaded_file = st.file_uploader("", type=["jpg", "jpeg", "png"], key="image_upload")  # Removed the label text
+    uploaded_file = st.file_uploader("", type=["jpg", "jpeg", "png"], key="image_upload")
 
 with col2:
-    input = st.text_area("Input Prompt (Garbage Name): ", key="input")  # Remove height to use CSS
+    input_text = st.text_area("Input Prompt (Garbage Name): ", key="input")
 
 # Initialize image variable
 image = None
@@ -74,8 +77,7 @@ if uploaded_file is not None:
 # Prepare the prompt
 prompt = f"""
 Please analyze the uploaded image and identify the type of waste. If the garbage name provided below is empty, rely on the image to determine the waste type.
-
-**Garbage Name:** {input or 'Unknown Waste - Please analyze the image'}
+Garbage Name {input_text or 'Unknown Waste - Please analyze the image'}
 
 Once identified, please classify the waste and provide comprehensive disposal and utilization instructions, formatted as follows:
 
@@ -91,30 +93,23 @@ Once identified, please classify the waste and provide comprehensive disposal an
 **Important:** The bot is strictly programmed to address waste and garbage-related inquiries only. If the user poses questions unrelated to waste management or provides an irrelevant image, politely prompt them to focus on waste and garbage items. In cases where the image content and the provided waste name do not match, prioritize the image for analysis, but inform the user of the discrepancy before proceeding.
 """
 
-
-
 # Button to submit
 submit = st.button("Let Aadish Cook 🧑🏻‍🍳...")
 
 # If the submit button is clicked
 if submit:
-    # Check if both input and image are empty
-    if not input and not uploaded_file:
+    if not input_text and not uploaded_file:
         st.warning("Please provide either text input or an image before proceeding.")
     else:
         response = get_gemini_response(prompt, image)
         if response:
             # Create columns for image and response with a gap
-            col1, col_gap, col2 = st.columns([2, 0.1, 3])  # 2:0.1:3 ratio for gap
+            col1, col_gap, col2 = st.columns([2, 0.1, 3])
 
-            # Display the uploaded image in the first column
             with col1:
                 if uploaded_file is not None:
                     st.image(image, caption="Uploaded Image", use_column_width=True)
 
-            # Display a gap in the middle column (just to add spacing)
-
-            # Display the response in the third column
             with col2:
-                if response:
-                    message(response, avatar_style="rounded", logo="https://64.media.tumblr.com/1f8b2446dbef744bb2578f9da45220c5/7c0fe64b947ac94c-0e/s500x750/6603c85ab0439ab084b9769eec6a02bb499a861d.gif")  # Display the response in a styled box
+                message(response, avatar_style="rounded", logo="https://64.media.tumblr.com/1f8b2446dbef744bb2578f9da45220c5/7c0fe64b947ac94c-0e/s500x750/6603c85ab0439ab084b9769eec6a02bb499a861d.gif")
+
