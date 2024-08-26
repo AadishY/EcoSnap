@@ -8,9 +8,10 @@ import time
 
 # Configuration for the generative model
 generation_config = {
-    "temperature": 1,
+    "temperature": 1.5,
     "top_p": 1,
-    "max_output_tokens": 8192,
+    "top_k": 50,
+    "max_output_tokens": 100000,
 }
 
 # Load environment variables from .env
@@ -42,7 +43,18 @@ def get_gemini_response(prompt, image, key_index=0):
     model = genai.GenerativeModel(
         "gemini-1.5-pro",
         generation_config=generation_config,
-        system_instruction="You are a sophisticated waste classification assistant programmed and created by Aadish to analyze images of waste and provide detailed, accurate, and professional information related to waste management. Your primary goal is to assist users in understanding how to properly dispose of or utilize various types of waste, while also offering insights into environmental impact. You will provide long answers."
+        system_instruction = '''
+You are a sophisticated waste classification assistant created by Aadish. Your purpose is to provide comprehensive, professional, and accurate guidance on waste management. Your main task is to analyze images or names of waste to determine their type and offer detailed instructions on proper disposal and creative reuse. Additionally, you will highlight the environmental impacts and benefits of correct waste management practices. Focus on delivering structured, informative, and clear responses that address the following key areas:
+
+1. **Waste Identification and Classification**: Accurately identify the waste type and category, providing explanations for the classification.
+2. **Disposal and Utilization Instructions**: Provide thorough, step-by-step disposal instructions, including any innovative or practical reuse options. Offer suggestions for sustainable practices that minimize waste and encourage recycling or upcycling.
+3. **Environmental Awareness**: Emphasize the importance of proper waste management for environmental protection, detailing any health and safety precautions necessary for handling and disposal.
+4. **Carbon Footprint Savings**: Estimate the carbon footprint savings achieved through correct waste disposal or recycling, using numerical values if possible to highlight the positive impact.
+
+Ensure your responses are clearly structured and easy to understand, using bold headings, bullet points, and line spacing for clarity. Your goal is to help users make environmentally responsible decisions and actively contribute to sustainability.
+
+If the user provides a query unrelated to waste management or an irrelevant image, respond politely by guiding them to focus on waste and garbage items to receive accurate assistance.
+'''
     )
     
     try:
@@ -115,31 +127,61 @@ with st.container():
 
 # Prepare the prompt
 prompt = f"""
-Please analyze the uploaded image and identify the type of waste. If the garbage name provided below is empty, rely on the image to determine the waste type.
+Objective: Analyze the uploaded image or the provided garbage name to accurately identify the type of waste. If no garbage name is provided, rely solely on the image for waste identification. Use the response format outlined below, ensuring your answers are precise and relevant to waste management. The "Disposal and Utilization Instructions" section should be detailed and prominent, as it is the primary focus of this project.
 
-Garbage Name {input_text or 'Unknown Waste - Please analyze the image'}
-only answer the format questions
+Garbage Name: {input_text or 'Unknown Waste - Please analyze the image'}
+If the input is unrelated to waste management or the provided image is irrelevant, politely remind the user to focus on waste and garbage items.
 
-Once identified, please classify the waste and provide comprehensive disposal and utilization instructions, you will not inlcude anything above you will just answer in the format given below, you may change the heading if you like, formatted as follows:
+**Response Format**  
+Use this exact format for your response. Highlight each title/heading in a larger font, use medium font for keywords, and normal font for the rest. Utilize bullet points and clear formatting to ensure easy readability. Provide a full, detailed answer. Feel free to adjust headings if necessary. Remember, "Disposal and Utilization Instructions" should be extensive and thorough.
 
-**Waste Name:** Clearly identify the waste from the image or the provided name.
 
-**Type of Waste:** Categorize the waste (e.g., E-waste, Recyclable, Organic, Chemical, etc.).
+### Waste Name:
+- Clearly identify the waste from the image or provided name. This is also a heading
 
-**Dustbin Color:** Specify the correct color of the dustbin for disposal. Provide a brief explanation of the reason behind using this dustbin color.
+### Type of Waste:
+- Categorize the waste (e.g., E-waste, Recyclable, Organic, Chemical, Hazardous, etc.). Multiple categories can apply.
+- Provide a brief explanation for the categorization.
 
-**Resin Identification Code (RIC):** If possible, provide the relevant waste code or resin identification code, along with a brief explanation of its significance. If unsure, omit this step. In short.
+### Dustbin Color:
+- Specify the correct color of the dustbin for disposal.
+- Include a brief rationale for using this particular dustbin color.
 
-**Disposal and Utilization Instructions:** Offer detailed, step-by-step instructions on how to properly dispose of or utilize the waste at home. Include creative and professional advice on recycling, reusing, or other sustainable practices. If the waste is not suitable for home management, guide the user on how to responsibly dispose of it at a designated recycling center or facility.
+### Resin Identification Code (RIC) (If applicable):
+- Provide the relevant waste or resin identification code.
+- Explain the significance of this code.
+- Omit this step if not applicable or unsure.
 
-**Environmental Awareness:** Add a concise section emphasizing the importance of proper waste disposal. Highlight the environmental benefits, such as waste reduction, resource conservation, or carbon savings, and how these actions contribute to environmental protection.
+### Disposal and Utilization Instructions:
+- Offer detailed, step-by-step instructions for proper disposal, tailored for home handling.
+- Indicate whether the waste requires special facilities for disposal.
+- Suggest innovative DIY projects or alternative uses to extend the item's life.
+- Highlight sustainable practices that encourage recycling or upcycling.
+- Provide suggestions for converting the waste into new products or resources, if applicable.
+- Mention relevant recycling programs or specialized collection points for this type of waste.
 
-**Carbon Footprint Savings:** Provide an estimation of the carbon footprint savings achieved by correctly disposing of the waste. If possible, include numeric values to quantify the reduction in emissions or resource conservation. Keep this explanation brief but informative in short.
+### Environmental Awareness:
+- List necessary health and safety precautions for handling or disposing of the waste.
+- Recommend protective gear or safe handling practices.
+- Identify risks associated with improper disposal.
+- Emphasize the importance of correct waste disposal for environmental protection.
+- Discuss environmental benefits of proper waste management, such as reducing landfill waste, conserving resources, or preventing pollution.
 
-(You may change the **title:** according to your need and make sure that all point can be easly distinguish.)
+### Carbon Footprint Savings:
+- Estimate the carbon footprint savings achieved by proper disposal or recycling.
+- Provide numerical values if possible to quantify emissions reductions or resource conservation.
+- Keep this section brief but informative, focusing on the positive impact of waste management.
 
-**Important:** The bot is strictly programmed to address waste and garbage-related inquiries only. If the user poses questions unrelated to waste management or provides an irrelevant image, politely prompt them to focus on waste and garbage items.
+
+**Guidelines for Response**  
+- Clarity and Precision: Responses should be clear, precise, and directly relevant to the waste type. Avoid ambiguity.
+- Tone: Use an informative and professional tone suitable for educational purposes.
+- Fallback for Unidentifiable Waste: If the waste cannot be confidently identified, respond with: "The waste type could not be identified based on the provided information. Please provide more details or consult a local waste management authority for assistance."
+- Focus on Waste Management: The bot is designed to handle waste-related queries only. For unrelated inquiries, respond with: "Please focus on waste and garbage items for accurate assistance."
+- Emphasis on Disposal and Utilization: Ensure that the "Disposal and Utilization Instructions" section is the most detailed and comprehensive part of the response, including both practical steps and creative reuse ideas.
 """
+
+
 
 # Check if an image is uploaded
 image = None
