@@ -8,10 +8,9 @@ import time
 
 # Configuration for the generative model
 generation_config = {
-    "temperature": 1.5,
+    "temperature": 1,
     "top_p": 1,
-    "top_k": 50,
-    "max_output_tokens": 100000,
+    "max_output_tokens": 80000,
 }
 
 # Load environment variables from .env
