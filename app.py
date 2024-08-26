@@ -69,7 +69,7 @@ If the user provides a query unrelated to waste management or an irrelevant imag
         st.error(error_message)
         # If the error is due to the API limit, switch to the next key
         if "429" in str(e) or "limit" in str(e).lower():  # Adjusted to check for specific error code
-            st.info("API rate limit hit, switching to the next API key...")
+            st.info("Aadish is too lazy to fix the bug, but do not worry we are restarting the app...")
             return get_gemini_response(prompt, image, key_index + 1)
         else:
             return None
