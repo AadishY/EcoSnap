@@ -29,7 +29,7 @@ def configure_api_key(key_index):
     if key_index < len(api_keys):
         current_api_key = api_keys[key_index]
         genai.configure(api_key=current_api_key)
-        st.info(f"Using API Key: {current_api_key[:5]}...")  # Log the current API key (partial for security)
+          # Log the current API key (partial for security)
     else:
         st.error("Bot is exhausted. Please try again later.")
         return False
