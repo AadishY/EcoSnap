@@ -24,6 +24,17 @@ api_keys = [
     # Add more keys as needed
 ]
 
+# Map commands to specific AI models
+model_map = {
+    "gemini-flash": "gemini-1.5-flash",
+    "gemini-pro": "gemini-1.5-pro",
+    "gemini-experiment": "gemini-1.5-pro-exp-0801",
+}
+
+# Initialize the default model
+current_model_name = "gemini-1.5-pro-exp-0801"
+
+
 # Function to configure the API key
 def configure_api_key(key_index):
     if key_index < len(api_keys):
@@ -42,7 +53,7 @@ def get_gemini_response(prompt, image, key_index=0):
         return None
 # gemini-1.5-flash, gemini-1.5-pro-exp-0801, gemini-1.5-pro    
     model = genai.GenerativeModel(
-        "gemini-1.5-pro-exp-0801",
+        current_model_name,
         generation_config=generation_config,
         system_instruction = '''
 You are a sophisticated waste classification assistant created by Aadish. Your purpose is to provide comprehensive, professional, and accurate guidance on waste management. Your main task is to analyze images or names of waste to determine their type and offer detailed instructions on proper disposal and creative reuse. Additionally, you will highlight the environmental impacts and benefits of correct waste management practices. Focus on delivering structured, informative, and clear responses that address the following key areas:
@@ -74,6 +85,14 @@ If the user provides a query unrelated to waste management or an irrelevant imag
         else:
             st.error("Aadish is too lazy to fix the bugs, please refresh the site or come back later...")
             return None
+# Function to check and switch models
+def check_and_switch_model(input_text):
+    global current_model_name
+    if input_text in model_map:
+        current_model_name = model_map[input_text]
+        st.success(f"Model switched to {current_model_name}")
+        return True
+    return False
 
 # Initialize the Streamlit app
 st.set_page_config(page_title="EcoSnap", layout="wide")
@@ -126,6 +145,10 @@ with st.container():
         uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"], key="image_upload", label_visibility="collapsed")
     with col2:
         input_text = st.text_area("Input Prompt (Garbage Name):", key="input", label_visibility="collapsed", placeholder="Enter garbage name here...")
+
+# Check for custom command and switch model if necessary
+if check_and_switch_model(input_text):
+    st.stop()  # Stop further execution if model is switched
 
 # Prepare the prompt
 prompt = f"""
