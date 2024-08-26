@@ -42,7 +42,7 @@ def get_gemini_response(prompt, image, key_index=0):
         return None
 # gemini-1.5-flash, gemini-1.5-pro-exp-0801, gemini-1.5-pro    
     model = genai.GenerativeModel(
-        "gemini-1.5-pro",
+        "gemini-1.5-pro-exp-0801",
         generation_config=generation_config,
         system_instruction = '''
 You are a sophisticated waste classification assistant created by Aadish. Your purpose is to provide comprehensive, professional, and accurate guidance on waste management. Your main task is to analyze images or names of waste to determine their type and offer detailed instructions on proper disposal and creative reuse. Additionally, you will highlight the environmental impacts and benefits of correct waste management practices. Focus on delivering structured, informative, and clear responses that address the following key areas:
@@ -72,6 +72,7 @@ If the user provides a query unrelated to waste management or an irrelevant imag
             st.info("Aadish is too lazy to fix the bug, but do not worry we are restarting the app...")
             return get_gemini_response(prompt, image, key_index + 1)
         else:
+            st.error("Aadish is too lazy to fix the bugs, please refresh the site or come back later...")
             return None
 
 # Initialize the Streamlit app
