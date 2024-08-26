@@ -24,49 +24,48 @@ api_keys = [
     # Add more keys as needed
 ]
 
-# Map commands to specific AI models
-model_map = {
-    "gemini-flash": "gemini-1.5-flash",
-    "gemini-pro": "gemini-1.5-pro",
-    "gemini-experiment": "gemini-1.5-pro-exp-0801",
-}
-
-# Initialize the default model
-current_model_name = "gemini-1.5-pro-exp-0801"
-
-
 # Function to configure the API key
 def configure_api_key(key_index):
     if key_index < len(api_keys):
         current_api_key = api_keys[key_index]
         genai.configure(api_key=current_api_key)
-          # Log the current API key (partial for security)
     else:
         st.error("Bot is exhausted. Please try again later.")
         return False
     return True
+
+# Define model mapping
+model_mapping = {
+    "gemini-flash": "gemini-1.5-flash",
+    "gemini-pro": "gemini-1.5-pro",
+    "gemini-experiment": "gemini-1.5-pro-exp-0801"
+}
+
+# Set the default model
+selected_model = "gemini-1.5-pro-exp-0801"
 
 # Function to get responses from the Gemini model
 def get_gemini_response(prompt, image, key_index=0):
     # Configure API key
     if not configure_api_key(key_index):
         return None
-# gemini-1.5-flash, gemini-1.5-pro-exp-0801, gemini-1.5-pro    
+
+    # Use the selected model
     model = genai.GenerativeModel(
-        current_model_name,
+        selected_model,  # Use the variable to dynamically choose the model
         generation_config=generation_config,
-        system_instruction = '''
-You are a sophisticated waste classification assistant created by Aadish. Your purpose is to provide comprehensive, professional, and accurate guidance on waste management. Your main task is to analyze images or names of waste to determine their type and offer detailed instructions on proper disposal and creative reuse. Additionally, you will highlight the environmental impacts and benefits of correct waste management practices. Focus on delivering structured, informative, and clear responses that address the following key areas:
+        system_instruction='''
+        You are a sophisticated waste classification assistant created by Aadish. Your purpose is to provide comprehensive, professional, and accurate guidance on waste management. Your main task is to analyze images or names of waste to determine their type and offer detailed instructions on proper disposal and creative reuse. Additionally, you will highlight the environmental impacts and benefits of correct waste management practices. Focus on delivering structured, informative, and clear responses that address the following key areas:
 
-1. **Waste Identification and Classification**: Accurately identify the waste type and category, providing explanations for the classification.
-2. **Disposal and Utilization Instructions**: Provide thorough, step-by-step disposal instructions, including any innovative or practical reuse options. Offer suggestions for sustainable practices that minimize waste and encourage recycling or upcycling.
-3. **Environmental Awareness**: Emphasize the importance of proper waste management for environmental protection, detailing any health and safety precautions necessary for handling and disposal.
-4. **Carbon Footprint Savings**: Estimate the carbon footprint savings achieved through correct waste disposal or recycling, using numerical values if possible to highlight the positive impact.
+        1. **Waste Identification and Classification**: Accurately identify the waste type and category, providing explanations for the classification.
+        2. **Disposal and Utilization Instructions**: Provide thorough, step-by-step disposal instructions, including any innovative or practical reuse options. Offer suggestions for sustainable practices that minimize waste and encourage recycling or upcycling.
+        3. **Environmental Awareness**: Emphasize the importance of proper waste management for environmental protection, detailing any health and safety precautions necessary for handling and disposal.
+        4. **Carbon Footprint Savings**: Estimate the carbon footprint savings achieved through correct waste disposal or recycling, using numerical values if possible to highlight the positive impact.
 
-Ensure your responses are clearly structured and easy to understand, using bold headings, bullet points, and line spacing for clarity. Your goal is to help users make environmentally responsible decisions and actively contribute to sustainability.
+        Ensure your responses are clearly structured and easy to understand, using bold headings, bullet points, and line spacing for clarity. Your goal is to help users make environmentally responsible decisions and actively contribute to sustainability.
 
-If the user provides a query unrelated to waste management or an irrelevant image, respond politely by guiding them to focus on waste and garbage items to receive accurate assistance.
-'''
+        If the user provides a query unrelated to waste management or an irrelevant image, respond politely by guiding them to focus on waste and garbage items to receive accurate assistance.
+        '''
     )
     
     try:
@@ -85,14 +84,6 @@ If the user provides a query unrelated to waste management or an irrelevant imag
         else:
             st.error("Aadish is too lazy to fix the bugs, please refresh the site or come back later...")
             return None
-# Function to check and switch models
-def check_and_switch_model(input_text):
-    global current_model_name
-    if input_text in model_map:
-        current_model_name = model_map[input_text]
-        st.success(f"Model switched to {current_model_name}")
-        return True
-    return False
 
 # Initialize the Streamlit app
 st.set_page_config(page_title="EcoSnap", layout="wide")
@@ -145,10 +136,6 @@ with st.container():
         uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"], key="image_upload", label_visibility="collapsed")
     with col2:
         input_text = st.text_area("Input Prompt (Garbage Name):", key="input", label_visibility="collapsed", placeholder="Enter garbage name here...")
-
-# Check for custom command and switch model if necessary
-if check_and_switch_model(input_text):
-    st.stop()  # Stop further execution if model is switched
 
 # Prepare the prompt
 prompt = f"""
@@ -208,32 +195,37 @@ Use this exact format for your response. Highlight each title/heading in a large
 
 
 
-# Check if an image is uploaded
-image = None
-if uploaded_file is not None:
-    image = Image.open(uploaded_file)
+# Check for custom commands to switch the model
+if input_text.strip().lower() in model_mapping:
+    selected_model = model_mapping[input_text.strip().lower()]
+    st.info(f"Model changed to: {selected_model}")
+else:
+    # Check if an image is uploaded
+    image = None
+    if uploaded_file is not None:
+        image = Image.open(uploaded_file)
 
-# Button to submit
-submit = st.button("Let Aadish Cook 🧑🏻‍🍳...")
+    # Button to submit
+    submit = st.button("Let Aadish Cook 🧑🏻‍🍳...")
 
-# Display the typing indicator while waiting for the response
-if submit:
-    if not input_text and not uploaded_file:
-        st.warning("Please provide either text input or an image before proceeding.")
-    else:
-        with st.spinner("EcoSnap is thinking... 🧠"):
-            time.sleep(1)  # Simulate a delay for visual effect
-            response = get_gemini_response(prompt, image)
+    # Display the typing indicator while waiting for the response
+    if submit:
+        if not input_text and not uploaded_file:
+            st.warning("Please provide either text input or an image before proceeding.")
+        else:
+            with st.spinner("EcoSnap is thinking... 🧠"):
+                time.sleep(1)  # Simulate a delay for visual effect
+                response = get_gemini_response(prompt, image)
 
-        if response:
-            # Create columns to separate the image and response
-            col1, col_gap, col2 = st.columns([1, 0.1, 3])  # Adjusted for wider bot response
+            if response:
+                # Create columns to separate the image and response
+                col1, col_gap, col2 = st.columns([1, 0.1, 3])  # Adjusted for wider bot response
 
-            # Display the uploaded image in the first column
-            with col1:
-                if uploaded_file is not None:
-                    st.image(image, caption="Uploaded Image", use_column_width=True)
+                # Display the uploaded image in the first column
+                with col1:
+                    if uploaded_file is not None:
+                        st.image(image, caption="Uploaded Image", use_column_width=True)
 
-            # Display the response in the second column, covering full width
-            with col2:
-                st.markdown(f'<div class="response-container"><div class="response-content">{response}</div></div>', unsafe_allow_html=True)
+                # Display the response in the second column, covering full width
+                with col2:
+                    st.markdown(f'<div class="response-container"><div class="response-content">{response}</div></div>', unsafe_allow_html=True)
