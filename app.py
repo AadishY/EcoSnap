@@ -27,7 +27,9 @@ api_keys = [
 # Function to configure the API key
 def configure_api_key(key_index):
     if key_index < len(api_keys):
-        genai.configure(api_key=api_keys[key_index])
+        current_api_key = api_keys[key_index]
+        genai.configure(api_key=current_api_key)
+        st.info(f"Using API Key: {current_api_key[:5]}...")  # Log the current API key (partial for security)
     else:
         st.error("Bot is exhausted. Please try again later.")
         return False
@@ -66,8 +68,8 @@ If the user provides a query unrelated to waste management or an irrelevant imag
         error_message = f"Error: {str(e)}"
         st.error(error_message)
         # If the error is due to the API limit, switch to the next key
-        if "limit" in str(e).lower() and key_index + 1 < len(api_keys):
-            st.info("Switching to the next API key...")
+        if "429" in str(e) or "limit" in str(e).lower():  # Adjusted to check for specific error code
+            st.info("API rate limit hit, switching to the next API key...")
             return get_gemini_response(prompt, image, key_index + 1)
         else:
             return None
