@@ -86,7 +86,7 @@ def get_gemini_response(prompt, image, key_index=0):
             return None
 
 # Initialize the Streamlit app
-st.set_page_config(page_title="EcoSnap", layout="wide", base="dark")
+st.set_page_config(page_title="EcoSnap", layout="wide")
 st.header("EcoSnap")
 
 # Apply custom CSS to adjust the input box and file uploader height and width
