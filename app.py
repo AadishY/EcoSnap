@@ -42,7 +42,7 @@ model_mapping = {
 }
 
 # Set the default model
-selected_model = "gemini-1.5-pro"
+selected_model = "gemini-1.5-pro-latest"
 
 # Function to get responses from the Gemini model
 def get_gemini_response(prompt, image, key_index=0):
@@ -86,7 +86,7 @@ def get_gemini_response(prompt, image, key_index=0):
             return None
 
 # Initialize the Streamlit app
-st.set_page_config(page_title="EcoSnap", layout="wide")
+st.set_page_config(page_title="EcoSnap", layout="wide", base="dark")
 st.header("EcoSnap")
 
 # Apply custom CSS to adjust the input box and file uploader height and width
