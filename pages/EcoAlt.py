@@ -14,13 +14,13 @@ client = Groq(api_key=GROQ_API_KEY)
 
 # Streamlit page configuration
 st.set_page_config(
-    page_title="EcoTalk",
+    page_title="EcoAlt",
     page_icon="",
     layout="wide",  # Set layout to wide
 )
 
 # Streamlit page title
-st.title("EcoTalk")
+st.title("EcoAlt")
 
 # Predefined input prompt template
 input_prompt_template = '''
@@ -48,9 +48,9 @@ if user_input:
 
     response = client.chat.completions.create(
         model="gemma2-9b-it",
-        temperature=1.2,
+        temperature=1,
         max_tokens=8000,
-        top_p=1,
+        top_p=0.7,
         messages=messages
     )
 
