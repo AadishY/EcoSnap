@@ -70,9 +70,11 @@ if user_prompt:
 #llama-3.1-70b-versatile, llama-3.1-8b-instant, gemma2-9b-it
         response = client.chat.completions.create(
             model="gemma2-9b-it",
+               temperature=1,
+               max_tokens=8000,
+               top_p=1,
             messages=messages
         )
-
     # Get the assistant's response
     assistant_response = response.choices[0].message.content
     st.session_state.chat_history.append({"role": "assistant", "content": assistant_response})
