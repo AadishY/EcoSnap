@@ -38,7 +38,7 @@ def configure_api_key(key_index):
 model_mapping = {
     "gemini-flash": "gemini-1.5-flash",
     "gemini-pro": "gemini-1.5-pro",
-    "gemini-experiment": "gemini-1.5-flash-exp-0827"
+    "gemini-experiment": "gemini-1.5-pro-exp-0827"
 }
 
 # Set the default model
