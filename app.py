@@ -42,7 +42,7 @@ model_mapping = {
 }
 
 # Set the default model
-selected_model = "gemini-1.5-pro-exp-0827"
+selected_model = "gemini-1.5-pro-latest"
 
 # Function to get responses from the Gemini model
 def get_gemini_response(prompt, image, key_index=0):
