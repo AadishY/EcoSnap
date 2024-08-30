@@ -72,9 +72,9 @@ if user_prompt:
 #llama-3.1-70b-versatile, llama-3.1-8b-instant, gemma2-9b-it
         response = client.chat.completions.create(
             model=model,
-               temperature=1,
-               max_tokens=8000,
-               top_p=1,
+            temperature=1,
+            max_tokens=8000,
+            top_p=1,
             messages=messages
         )
 
