@@ -5,7 +5,7 @@ from groq import Groq
 
 # Load environment variables from .env file
 load_dotenv()
-model="llama-3.1-8b-instant"
+model="llama-3.1-70b-versatile"
 #"llama-3.1-8b-instant", "llama-3.1-70b-versatile", "gemma-7b-it", "gemma2-9b-it"
 
 # Get the API key from environment variables
