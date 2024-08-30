@@ -28,7 +28,7 @@ st.title("EcoAlt")
 input_prompt_template = '''
 List eco-friendly alternatives for the following item: {item_name}. 
 For each alternative, provide a bullet point with a concise description that highlights its sustainability and environmental benefits.
-
+Use the appropriate emojis.
 Response Guidelines:
 1. Include 6-10 specific and relevant alternatives.
 2. Explain why each alternative is sustainable and environmentally friendly.
