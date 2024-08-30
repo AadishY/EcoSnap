@@ -14,19 +14,28 @@ client = Groq(api_key=GROQ_API_KEY)
 
 # Streamlit page configuration
 st.set_page_config(
-    page_title="EcoAlt",
+    page_title="EcoTalk",
     page_icon="",
     layout="wide",  # Set layout to wide
 )
 
 # Streamlit page title
-st.title("EcoAlt")
+st.title("EcoTalk")
 
-# Predefined input prompt template
 input_prompt_template = '''
-Provide eco-friendly alternatives for the following item: {item_name}.
-The response should be in bullet points and focus only on eco-friendly accurate  alternatives with a description of those items. 
-If the input is not a valid item name, do not respond.
+List eco-friendly alternatives for the following item: {item_name}. 
+For each alternative, provide a bullet point with a concise description that highlights its sustainability and environmental benefits.
+
+Response Guidelines:
+1. Include 6-10 specific and relevant alternatives.
+2. Explain why each alternative is sustainable and environmentally friendly.
+3. Describe the materials, production methods, or practices that contribute to its sustainability.
+4. Note if the alternative is reusable, recyclable, or has a low environmental impact.
+5. Highlight specific benefits such as reduced carbon footprint, biodegradability, or non-toxicity.
+6. Ensure each alternative is practical and implementable for the average user.
+Do not provide irrelevant or unsure names.
+
+Do not respond if the input is unclear or not a valid item name. Focus on providing accurate and actionable eco-friendly suggestions.
 '''
 
 # Use st.chat_input for user input
@@ -39,10 +48,18 @@ if user_input:
 
     # Send the formatted prompt to the LLM and get a response
     messages = [
-        {"role": "system", "content": '''
-        Respond only to valid item names with a description of those items. Provide eco-friendly accurate alternatives in bullet points.
-        If the input is not valid item name respond politely by guiding them to focus items names to receive accurate assistance.
-        '''},
+       {"role": "system", "content": '''
+You are an eco-friendly assistant specialized in suggesting sustainable alternatives to everyday items. Your responses should only address valid item names provided by the user and offer eco-friendly alternatives in bullet points. Each alternative should include a brief description to help the user understand why it's a sustainable choice.
+
+Guidelines:
+1. If the user provides a valid item name, respond with a list of accurate and relevant eco-friendly alternatives, along with short descriptions for each option.
+2. If the user input is unclear, irrelevant, or does not seem to be a valid item name, respond politely by guiding the user to specify a particular item name for which they seek eco-friendly alternatives.
+3. Keep responses focused and concise, ensuring that the information is helpful and promotes environmentally conscious choices.
+4. Avoid responding to inputs that do not relate to items or do not require eco-friendly alternatives, maintaining a strict focus on the topic of sustainability.
+5. Provide as many names as you can.
+Remember, your goal is to assist users in making informed, environmentally friendly choices by providing clear, actionable suggestions.
+'''},
+
         {"role": "user", "content": input_prompt}
     ]
 
@@ -50,13 +67,15 @@ if user_input:
         model="gemma2-9b-it",
         temperature=1,
         max_tokens=8000,
-        top_p=0.7,
+        top_p=1,
         messages=messages
     )
 
     # Get the assistant's response
     assistant_response = response.choices[0].message.content
 
-    # Display the LLM's response if it's valid
+    # Display the bot's response using st.chat_message
+
     if assistant_response.strip():
-        st.markdown(assistant_response)
+        with st.chat_message("user"):
+            st.markdown(assistant_response)
