@@ -6,6 +6,9 @@ from groq import Groq
 # Load environment variables from .env file
 load_dotenv()
 
+model="gemma2-9b-it"
+#"llama-3.1-8b-instant", "llama-3.1-70b-versatile", "gemma-7b-it", "gemma2-9b-it"
+
 # Get the API key from environment variables
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
@@ -20,7 +23,7 @@ st.set_page_config(
 )
 
 # Streamlit page title
-st.title("EcoTalk")
+st.title("EcoAlt")
 
 input_prompt_template = '''
 List eco-friendly alternatives for the following item: {item_name}. 
@@ -64,7 +67,7 @@ Remember, your goal is to assist users in making informed, environmentally frien
     ]
 
     response = client.chat.completions.create(
-        model="gemma2-9b-it",
+        model=model,
         temperature=1,
         max_tokens=8000,
         top_p=1,
