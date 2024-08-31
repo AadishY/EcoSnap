@@ -89,95 +89,19 @@ def get_gemini_response(prompt, image, key_index=0):
 st.header("EcoSnap")
 
 # Apply custom CSS to adjust the input box and file uploader height and width
-st.markdown(
-    """
-    <style>
-    /* General styles for all devices */
-    .stTextArea textarea {
-        height: 75px !important;
-        width: 100% !important;
-        resize: none;
-    }
-    .stFileUploader {
-        height: 75px !important;
-        width: 100% !important;
-    }
-    .st-c0 {
-        min-height: 75px;
-    }
-    .aligned-row > div {
-        display: flex;
-        align-items: center;
-    }
-    .typing-indicator {
-        font-style: italic;
-        color: #888;
-    }
-    .response-container {
-        width: 100% !important;
-        padding: 0 !important;
-        margin: 0 !important;
-    }
-    .response-content {
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-    }
-    /* Media query for mobile view */
-    @media (max-width: 768px) {
-        .stContainer > div > .stTextArea, .stContainer > div > .stFileUploader {
-            width: 100% !important;
-        }
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
-# Create a container for the input fields and align them in the same line
-# Create a container for the input fields and align them in the same line
-with st.container():
-    col1, col_mid, col2 = st.columns([1, 0.1, 1])  # Three columns with a small middle column as spacer
-    
-    with col1:
-        uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"], key="image_upload", label_visibility="collapsed")
-    with col_mid:
-        st.write("")  # Empty space for visual separation
-    with col2:
-        input_text = st.text_area("Input Prompt (Garbage Name):", key="input", label_visibility="collapsed", placeholder="Enter garbage name here...")
-
 # Apply custom CSS to adjust the input box and file uploader height and width
 st.markdown(
     """
     <style>
     /* General styles for all devices */
     .stTextArea textarea {
-        height: 75px !important;
+        height: 45px !important; /* Adjusted height */
         width: 100% !important;
         resize: none;
     }
     .stFileUploader {
-        height: 75px !important;
+        height: 45px !important; /* Adjusted height */
         width: 100% !important;
-    }
-    .st-c0 {
-        min-height: 75px;
-    }
-    .aligned-row > div {
-        display: flex;
-        align-items: center;
-    }
-    .typing-indicator {
-        font-style: italic;
-        color: #888;
-    }
-    .response-container {
-        width: 100% !important;
-        padding: 0 !important;
-        margin: 0 !important;
-    }
-    .response-content {
-        margin-left: 0 !important;
-        margin-right: 0 !important;
     }
     /* Media query for mobile view */
     @media (max-width: 768px) {
@@ -196,6 +120,15 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
+# Create a container for the input fields and align them in the same line
+with st.container():
+    col1, col2 = st.columns(2)  # Two columns with equal width
+    
+    with col1:
+        uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"], key="image_upload", label_visibility="collapsed")
+    with col2:
+        input_text = st.text_area("Input Prompt (Garbage Name):", key="input", label_visibility="collapsed", placeholder="Enter garbage name here...")
 
 # Prepare the prompt
 prompt = f"""
