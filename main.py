@@ -13,11 +13,14 @@ st.set_page_config(
 st.markdown(
     """
     <style>
-    .st-emotion-cache-1wbqy5l.e3g6aar2 {
-        display: none;
+    /* Hide the entire Share button (text + logo) */
+    .stActionButton {
+        display: none !important;
     }
-    .stActionButton span[data-testid="stActionButtonLabel"] {
-        display: none;
+    /* Optionally, hide specific parts of the Share button */
+    .stActionButton span[data-testid="stActionButtonLabel"], 
+    .stActionButton div[data-testid="stActionButtonIcon"] {
+        display: none !important;
     }
     </style>
     """,
