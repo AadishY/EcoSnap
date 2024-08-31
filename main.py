@@ -11,16 +11,17 @@ st.set_page_config(
 )
 st.markdown(
     """
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var buttons = document.querySelectorAll("button");
-        buttons.forEach(function(button) {
-            if (button.innerText.includes('Fork')) {
-                button.style.display = 'none';
-            }
-        });
-    });
-    </script>
+    <style>
+    /* Hide the entire Share button (text + logo) */
+    .stActionButton {
+        display: none !important;
+    }
+    /* Optionally, hide specific parts of the Share button */
+    .stActionButton span[data-testid="stActionButtonLabel"], 
+    .stActionButton div[data-testid="stActionButtonIcon"] {
+        display: none !important;
+    }
+    </style>
     """,
     unsafe_allow_html=True
 )
