@@ -99,7 +99,7 @@ st.markdown(
         resize: none;
     }
     .stFileUploader {
-        height: 125px !important;
+        height: 130px !important;
         width: 100% !important;
     }
     .st-c0 {
