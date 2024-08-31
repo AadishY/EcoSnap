@@ -93,28 +93,34 @@ st.header("EcoSnap")
 st.markdown(
     """
     <style>
-    /* General styles for all devices */
     .stTextArea textarea {
-        height: 45px !important; /* Adjusted height */
+        height: 75px !important;
         width: 100% !important;
         resize: none;
     }
     .stFileUploader {
-        height: 45px !important; /* Adjusted height */
+        height: 75px !important;
         width: 100% !important;
     }
-    /* Media query for mobile view */
-    @media (max-width: 768px) {
-        .stApp {
-            flex-direction: column !important;  /* Make columns stack on top of each other */
-        }
-        .stColumn {
-            width: 100% !important;  /* Make each column take the full width */
-            margin-bottom: 10px;     /* Add spacing between stacked columns */
-        }
-        .stTextArea textarea, .stFileUploader {
-            width: 100% !important;  /* Ensure full width on mobile */
-        }
+    .st-c0 {
+    min-height: 75px;
+    }
+    .aligned-row > div {
+        display: flex;
+        align-items: center;
+    }
+    .typing-indicator {
+        font-style: italic;
+        color: #888;
+    }
+    .response-container {
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    .response-content {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
     }
     </style>
     """,
@@ -125,6 +131,7 @@ st.markdown(
 with st.container():
     col1, col2 = st.columns(2)  # Two columns with equal width
     
+    # Change: Swap the input box and file uploader components
     with col1:
         uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"], key="image_upload", label_visibility="collapsed")
     with col2:
