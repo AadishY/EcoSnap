@@ -29,19 +29,22 @@ st.markdown(
 )
 
 # Title and Description in the center
-st.markdown("<h2>🌿 EcoSnap: Your Eco-Friendly AI Assistant</h2>", unsafe_allow_html=True)
-st.markdown("<h5>An AI-powered application to classify waste and find proper disposal steps.</h4>", unsafe_allow_html=True)
+st.markdown("<h2 style='color: #2e8b57;'>🌿 EcoSnap: Your Eco-Friendly AI Assistant</h2>", unsafe_allow_html=True)
+
+
+st.markdown("<h5 style='color: #3e8e41;'>An AI-powered application to classify waste and find proper disposal steps.</h5>", unsafe_allow_html=True)
 
 # Description Section
 st.markdown("""
-EcoSnap is a comprehensive tool designed to assist users in managing waste more effectively and adopting eco-friendly habits. Our key features include:
+EcoSnap is your go-to tool for managing waste effectively and embracing eco-friendly practices. Our innovative features are designed to make sustainability both easy and impactful:
 
-- **EcoSnap** 📸: Capture images of waste items to classify them and receive proper disposal methods.
-- **EcoAlt** 🌱: Discover environmentally friendly alternatives to everyday products to reduce your carbon footprint.
-- **EcoTalk** 🗣️: Chat with our eco-friendly AI assistant to get answers to your environmental questions and receive guidance on sustainable practices.
+- **EcoSnap** 📸: Snap a photo of waste items to classify them and receive detailed disposal instructions. ♻️
+- **EcoAlt** 🌱: Discover eco-friendly alternatives to everyday products and reduce your carbon footprint. 🌍
+- **EcoTalk** 🗣️: Chat with our AI assistant to get answers to your environmental questions and tips on sustainable living. 🌿
 
-This project aims to make a significant impact on environmental sustainability by promoting awareness and offering practical solutions.
-""")
+Our mission is to foster environmental awareness and provide practical solutions for a greener future. Together, we can make a difference! 🌟
+""", unsafe_allow_html=True)
+
 
 # Navigation Buttons (not in the same line, one below the other)
 if st.button("Go to EcoSnap 📸"):
@@ -54,19 +57,52 @@ if st.button("Go to EcoTalk 🗣️"):
     switch_page("EcoTalk")
 
 st.write("---")
-
 # About Us Section
-st.header("About Us")
+st.markdown("<h2 style='color: #4682b4;'>About Us</h2>", unsafe_allow_html=True)
+
 st.markdown("""
-Hello! I am **Aadish Kumar Yadav**, a Class 11th Science student at Red Rose Public School, Lucknow, India. I am passionate about technology and sustainability, which led me to develop EcoSnap.
+#### **Aadish Kumar Yadav: Elden Lord** 🌟  
+Hello! I am **Aadish Kumar Yadav**, a Class 11th Science student at Red Rose Public School, Lucknow, India. My passion for technology and sustainability led me to develop **EcoSnap**. 🌱<br>
+As the main developer, I believe that every small action can contribute to a significant change. By harnessing technology, my goal is to simplify the process of making eco-friendly decisions and foster a more sustainable lifestyle.
 
-👨‍💻 As the main developer of EcoSnap, I believe that small actions can lead to big changes, and technology is a powerful tool to bring about this change. My goal is to make it easier for everyone to make environmentally conscious decisions.
+#### **Aditya Sameer Pandey: Secretary** 🌟
+<img src="https://raw.githubusercontent.com/AadishY/EcoSnap/main/Logo/Screenshot%202024-08-31%20191741.png" 
+             style="border-radius: 50%; width: 200px; height: 200px; object-fit: cover;" />
+              <br>
+I am **Aditya Sameer Pandey**, also a Class 11th Science student at Red Rose Public School, Lucknow. My dedication to sustainability and technology drives my work on **EcoSnap**. 🌍<br>
+Working alongside Aadish, I focus on enhancing the functionality and user experience of EcoSnap. Our joint efforts aim to promote sustainable practices and inspire positive environmental actions.
 
-🤝 I am joined by my teammate, **Aditya Sameer Pandey**, who is also a Class 11th Science student from Red Rose Public School. Aditya shares the same passion for sustainability and contributes significantly to our project.
+#### **Our Project** 🚀  
+We created EcoSnap for the Sustainable Innovators competition, aiming to deliver a user-friendly application that encourages green choices. We are enthusiastic about making a positive environmental impact and inviting others to join us in our mission. 🌿
 
-🌱 We developed EcoSnap for the Sustainable Innovators competition, aiming to create a user-friendly application that encourages sustainable living practices. 
+For more details about our projects and collaborations, you can visit my <a href="https://github.com/AadishY">
+    <img src="https://img.shields.io/badge/Github-Profile-green" alt="GitHub">
+</a>
 
-For more details about my projects and collaborations, you can visit my [GitHub Profile](https://github.com/AadishY).
+Thank you for visiting our page and supporting our efforts to make the world a greener place! Your interest and involvement are crucial in driving the change towards a more sustainable future. 🌏
+""", unsafe_allow_html=True)
 
-Thank you for visiting our page and for your interest in making the world a greener place!
+
+st.write("---")
+
+st.markdown("<h2 style='color: #6a5acd;'>Credit</h2>", unsafe_allow_html=True)
+
+st.markdown("""
+We would like to extend our gratitude to the following:
+
+- **Google Gemini** 🧠: For providing advanced image recognition capabilities.
+- **Groq** 🚀: For powering our text models with high performance.
+- **Streamlit** 🌐: For enabling us to create this web application from python with ease.
 """)
+st.write("---")
+st.markdown("""
+<div style="text-align: center;">
+    <h2 style='color: #32cd32;'>Thank You!</h2>
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown("""
+We deeply appreciate your support for EcoSnap! 🌟
+**Your interest** helps drive our mission for a sustainable future. 🌍 Together, we can make a positive impact on the environment. 🌿
+Thank you for joining us on this journey! 💪
+""", unsafe_allow_html=True)
