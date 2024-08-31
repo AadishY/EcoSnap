@@ -135,7 +135,11 @@ with st.container():
     with col1:
         uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"], key="image_upload", label_visibility="collapsed")
     with col3:
-        st.write("OR")
+        st.markdown("""
+        <div style="text-align: center;">
+        <p>OR</p>
+        </div>
+        """,unsafe_allow_html=True)
     with col2:
         input_text = st.text_area("Input Prompt (Garbage Name):", key="input", label_visibility="collapsed", placeholder="Enter garbage name here...")
 
