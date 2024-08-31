@@ -92,6 +92,7 @@ st.header("EcoSnap")
 st.markdown(
     """
     <style>
+    /* General styles for all devices */
     .stTextArea textarea {
         height: 75px !important;
         width: 100% !important;
@@ -102,7 +103,7 @@ st.markdown(
         width: 100% !important;
     }
     .st-c0 {
-    min-height: 75px;
+        min-height: 75px;
     }
     .aligned-row > div {
         display: flex;
@@ -120,6 +121,12 @@ st.markdown(
     .response-content {
         margin-left: 0 !important;
         margin-right: 0 !important;
+    }
+    /* Media query for mobile view */
+    @media (max-width: 768px) {
+        .stContainer > div > .stTextArea, .stContainer > div > .stFileUploader {
+            width: 100% !important;
+        }
     }
     </style>
     """,
