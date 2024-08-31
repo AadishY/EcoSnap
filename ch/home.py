@@ -62,6 +62,9 @@ st.markdown("<h2 style='color: #4682b4;'>About Us</h2>", unsafe_allow_html=True)
 
 st.markdown("""
 #### **Aadish Kumar Yadav: Elden Lord** 🌟  
+<img src="https://i.pinimg.com/originals/ec/5f/37/ec5f377a267f9e999a5f4b13bd0fb102.gif" 
+             style="border-radius: 50%; width: 200px; height: 200px; object-fit: cover;" />
+              <br>
 Hello! I am **Aadish Kumar Yadav**, a Class 11th Science student at Red Rose Public School, Lucknow, India. My passion for technology and sustainability led me to develop **EcoSnap**. 🌱<br>
 As the main developer, I believe that every small action can contribute to a significant change. By harnessing technology, my goal is to simplify the process of making eco-friendly decisions and foster a more sustainable lifestyle.
 
