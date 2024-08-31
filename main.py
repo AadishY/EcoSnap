@@ -1,5 +1,5 @@
 import streamlit as st
-from streamlit_extras.badges import badge
+
 
 
 # --- PAGE SETUP ---
