@@ -102,8 +102,9 @@ st.markdown(
         height: 130px !important;
         width: 100% !important;
     }
+    
     .st-c0 {
-    min-height: 75px;
+    min-height: 100px;
     }
     .aligned-row > div {
         display: flex;
