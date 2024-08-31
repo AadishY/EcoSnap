@@ -11,20 +11,20 @@ st.set_page_config(
 )
 st.markdown(
     """
-    <style>
-    /* Target and hide the Fork button by its label text */
-    span[data-testid="stActionButtonLabel"]:contains('Fork') {
-        display: none !important;
-    }
-
-    /* Alternatively, target by the exact class and label */
-    .stActionButton span[data-testid="stActionButtonLabel"]:contains('Fork') {
-        display: none !important;
-    }
-    </style>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var buttons = document.querySelectorAll("button");
+        buttons.forEach(function(button) {
+            if (button.innerText.includes('Fork')) {
+                button.style.display = 'none';
+            }
+        });
+    });
+    </script>
     """,
     unsafe_allow_html=True
 )
+
 # Define pages
 about_page = st.Page(
     "ch/home.py",
