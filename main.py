@@ -13,13 +13,21 @@ st.markdown(
     """
     <style>
     /* Hide the Streamlit viewer badge container */
-    .viewerBadge_container__r5tak, .viewerBadge_link__qRIco, .stActionButton {
+    [class*="viewerBadge_container__"] {
+        display: none !important;
+    }
+    [class*="viewerBadge_link__"] {
+        display: none !important;
+    }
+    /* Hide the button and any other elements related to the badge */
+    [class*="stActionButton"] {
         display: none !important;
     }
     </style>
     """,
     unsafe_allow_html=True
 )
+
 # Define pages
 about_page = st.Page(
     "ch/home.py",
