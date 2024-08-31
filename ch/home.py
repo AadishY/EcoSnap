@@ -1,5 +1,4 @@
 import streamlit as st
-from streamlit_extras.switch_page_button import switch_page
 
 # Set the page layout
 
@@ -48,13 +47,13 @@ Our mission is to foster environmental awareness and provide practical solutions
 
 # Navigation Buttons (not in the same line, one below the other)
 if st.button("Go to EcoSnap 📸"):
-    switch_page("EcoSnap")
+    st.switch_page("ch/EcoSnap.py")
 
 if st.button("Go to EcoAlt 🌱"):
-    switch_page("EcoAlt")
+    st.switch_page("ch/EcoAlt.py")
 
 if st.button("Go to EcoTalk 🗣️"):
-    switch_page("EcoTalk")
+    st.switch_page("ch.EcoTalk.py")
 
 st.write("---")
 # About Us Section
