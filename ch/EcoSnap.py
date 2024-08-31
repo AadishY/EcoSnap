@@ -129,11 +129,13 @@ st.markdown(
 
 # Create a container for the input fields and align them in the same line
 with st.container():
-    col1, col2 = st.columns(2)  # Two columns with equal width
+    col1, col3, col2 = st.columns([2, 2, 1]) # Two columns with equal width
     
     # Change: Swap the input box and file uploader components
     with col1:
         uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"], key="image_upload", label_visibility="collapsed")
+    with col3:
+        st.write("")
     with col2:
         input_text = st.text_area("Input Prompt (Garbage Name):", key="input", label_visibility="collapsed", placeholder="Enter garbage name here...")
 
