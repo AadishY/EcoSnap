@@ -134,8 +134,9 @@ st.markdown(
 )
 
 # Create a container for the input fields and align them in the same line
+# Create a container for the input fields and align them in the same line
 with st.container():
-    col1, col_mid, col2 = st.columns([2, 0.2, 2])  # Adjust column ratios for better spacing
+    col1, col_mid, col2 = st.columns([1, 0.1, 1])  # Three columns with a small middle column as spacer
     
     with col1:
         uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"], key="image_upload", label_visibility="collapsed")
@@ -144,18 +145,51 @@ with st.container():
     with col2:
         input_text = st.text_area("Input Prompt (Garbage Name):", key="input", label_visibility="collapsed", placeholder="Enter garbage name here...")
 
-# Add custom CSS to make columns stack on smaller screens
+# Apply custom CSS to adjust the input box and file uploader height and width
 st.markdown(
     """
     <style>
-    /* Custom styles for better mobile responsiveness */
+    /* General styles for all devices */
+    .stTextArea textarea {
+        height: 75px !important;
+        width: 100% !important;
+        resize: none;
+    }
+    .stFileUploader {
+        height: 75px !important;
+        width: 100% !important;
+    }
+    .st-c0 {
+        min-height: 75px;
+    }
+    .aligned-row > div {
+        display: flex;
+        align-items: center;
+    }
+    .typing-indicator {
+        font-style: italic;
+        color: #888;
+    }
+    .response-container {
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    .response-content {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    /* Media query for mobile view */
     @media (max-width: 768px) {
-        .stColumn {
-            flex: 100% !important;  /* Make columns stack on top of each other on mobile */
-            max-width: 100% !important;
+        .stApp {
+            flex-direction: column !important;  /* Make columns stack on top of each other */
         }
-        .stColumn > div {
-            margin-bottom: 10px;  /* Space between stacked columns */
+        .stColumn {
+            width: 100% !important;  /* Make each column take the full width */
+            margin-bottom: 10px;     /* Add spacing between stacked columns */
+        }
+        .stTextArea textarea, .stFileUploader {
+            width: 100% !important;  /* Ensure full width on mobile */
         }
     }
     </style>
