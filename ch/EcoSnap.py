@@ -99,17 +99,10 @@ st.markdown(
         resize: none;
     }
     .stFileUploader {
-        height: 130px !important;
+        height: 145px !important;
         width: 100% !important;
     }
     
-    .st-emotion-cache-1on073z .e1b2p2ww7 {
-        flex-direction: column;
-        max-width: 75px:
-    }
-    .stTextArea textarea, .stFileUploader {
-        width: 75% !important;
-    }
     
     .st-c0 {
     min-height: 75px;
