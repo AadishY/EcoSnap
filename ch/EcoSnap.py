@@ -135,7 +135,7 @@ st.markdown(
 
 # Create a container for the input fields and align them in the same line
 with st.container():
-    col1, col_mid, col2 = st.columns([3, 0.2, 3])  # Three columns with a small middle column as spacer
+    col1, col_mid, col2 = st.columns([3, 1, 3])  # Three columns with a small middle column as spacer
     
     with col1:
         uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"], key="image_upload", label_visibility="collapsed")
