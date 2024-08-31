@@ -12,20 +12,14 @@ st.set_page_config(
 st.markdown(
     """
     <style>
-    /* Hide the entire viewer badge */
-    .viewerBadge_container__r5tak {
-        display: none !important;
-    }
-
-    /* Hide the badge link and SVG */
-    .viewerBadge_link__qRIco {
+    /* Hide the Streamlit viewer badge container */
+    .viewerBadge_container__r5tak, .viewerBadge_link__qRIco, .stActionButton {
         display: none !important;
     }
     </style>
     """,
     unsafe_allow_html=True
 )
-
 # Define pages
 about_page = st.Page(
     "ch/home.py",
