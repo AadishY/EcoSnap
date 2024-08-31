@@ -4,4 +4,4 @@ google.generativeai
 streamlit-chat
 streamlit_chat 
 groq
-streamlit_extras
+
