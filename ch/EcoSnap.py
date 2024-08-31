@@ -129,7 +129,7 @@ st.markdown(
 
 # Create a container for the input fields and align them in the same line
 with st.container():
-    col1, col3, col2 = st.columns([2, 2, 1]) # Two columns with equal width
+    col1, col3, col2 = st.columns([2, 0.2, 2]) # Two columns with equal width
     
     # Change: Swap the input box and file uploader components
     with col1:
