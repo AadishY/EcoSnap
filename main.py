@@ -12,16 +12,17 @@ st.set_page_config(
 st.markdown(
     """
     <style>
-    /* Hide the Streamlit viewer badge container */
-    [class*="viewerBadge_container__"] {
-        display: none !important;
-    }
-    [class*="viewerBadge_link__"] {
-        display: none !important;
-    }
-    /* Hide the button and any other elements related to the badge */
-    [class*="stActionButton"] {
-        display: none !important;
+    /* Hide the entire footer where the Streamlit badge is */
+    footer {visibility: hidden;}
+    
+    /* Specifically target the "Hosted with Streamlit" badge container */
+    footer:after {
+        content: '';
+        display: block;
+        position: relative;
+        visibility: hidden;
+        height: 0;
+        width: 100%;
     }
     </style>
     """,
