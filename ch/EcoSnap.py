@@ -135,14 +135,33 @@ st.markdown(
 
 # Create a container for the input fields and align them in the same line
 with st.container():
-    col1, col_mid, col2 = st.columns([3, 1, 3])  # Three columns with a small middle column as spacer
+    col1, col_mid, col2 = st.columns([2, 0.2, 2])  # Adjust column ratios for better spacing
     
     with col1:
         uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"], key="image_upload", label_visibility="collapsed")
     with col_mid:
-        st.write("OR")  # Empty space for visual separation
+        st.write("")  # Empty space for visual separation
     with col2:
         input_text = st.text_area("Input Prompt (Garbage Name):", key="input", label_visibility="collapsed", placeholder="Enter garbage name here...")
+
+# Add custom CSS to make columns stack on smaller screens
+st.markdown(
+    """
+    <style>
+    /* Custom styles for better mobile responsiveness */
+    @media (max-width: 768px) {
+        .stColumn {
+            flex: 100% !important;  /* Make columns stack on top of each other on mobile */
+            max-width: 100% !important;
+        }
+        .stColumn > div {
+            margin-bottom: 10px;  /* Space between stacked columns */
+        }
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 # Prepare the prompt
 prompt = f"""
