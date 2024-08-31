@@ -102,11 +102,14 @@ st.markdown(
         height: 130px !important;
         width: 100% !important;
     }
-        /* Adjust layout for screens smaller than 576px */
-    @media (max-width: 75px) {
-        .st-emotion-cache-1on073z .e1b2p2ww7 {
-            flex-direction: column;
-        }
+    
+    .st-emotion-cache-1on073z .e1b2p2ww7 {
+        flex-direction: column;
+        max-width: 75px:
+    }
+    .stTextArea textarea, .stFileUploader {
+        width: 75% !important;
+    }
     
     .st-c0 {
     min-height: 75px;
