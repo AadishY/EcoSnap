@@ -9,8 +9,23 @@ st.set_page_config(
     page_title="EcoSnap",
     page_icon=":earth_africa:",
 )
-
 st.markdown(
+    """
+    <style>
+    /* Target and hide the Fork button by its label text */
+    span[data-testid="stActionButtonLabel"]:contains('Fork') {
+        display: none !important;
+    }
+
+    /* Alternatively, target by the exact class and label */
+    .stActionButton span[data-testid="stActionButtonLabel"]:contains('Fork') {
+        display: none !important;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+"""st.markdown(
     """
     <style>
     /* Hide the entire Share button (text + logo) */
@@ -25,7 +40,7 @@ st.markdown(
     </style>
     """,
     unsafe_allow_html=True
-)
+)"""
 # Define pages
 about_page = st.Page(
     "ch/home.py",
