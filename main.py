@@ -9,28 +9,6 @@ st.set_page_config(
     page_title="EcoSnap",
     page_icon=":earth_africa:",
 )
-st.markdown(
-    """
-    <style>
-    /* Hide the footer containing the Streamlit branding */
-    footer {visibility: hidden; height: 0; position: relative;}
-    
-    /* Hide any remaining elements that might display the badge */
-    .viewerBadge_container__r5tak, .viewerBadge_link__qRIco {display: none;}
-    
-    /* Ensures that no space is left where the badge used to be */
-    footer:before {
-        content: '';
-        display: block;
-        position: relative;
-        height: 0;
-        width: 100%;
-        visibility: hidden;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
 #Define pages
 about_page = st.Page(
     "ch/home.py",
