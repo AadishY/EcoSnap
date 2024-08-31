@@ -9,22 +9,7 @@ st.set_page_config(
     page_title="EcoSnap",
     page_icon=":earth_africa:",
 )
-st.markdown(
-    """
-    <style>
-    /* Hide the entire Share button (text + logo) */
-    .stActionButton {
-        display: none !important;
-    }
-    /* Optionally, hide specific parts of the Share button */
-    .stActionButton span[data-testid="stActionButtonLabel"], 
-    .stActionButton div[data-testid="stActionButtonIcon"] {
-        display: none !important;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+
 
 # Define pages
 about_page = st.Page(
