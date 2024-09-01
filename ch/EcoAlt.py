@@ -17,7 +17,9 @@ client = Groq(api_key=GROQ_API_KEY)
 
 
 # Streamlit page title
-st.title("EcoAlt")
+st.markdown("<h1 style='color: rgb(106, 90, 205);'>🌱 EcoAlt</h1>", unsafe_allow_html=True)
+st.markdown("🌱 **EcoAlt**: Discover eco-friendly alternatives for everyday products.<br>🔍 Simply enter the name of a product, and EcoAlt will suggest sustainable options for a greener lifestyle!",unsafe_allow_html=True)
+st.write("---")
 
 input_prompt_template = '''
 List eco-friendly alternatives for the following item: {item_name}. 
