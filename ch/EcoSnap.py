@@ -209,7 +209,7 @@ else:
         image = Image.open(uploaded_file)
 
     # Button to submit
-    submit = st.button("Let Aadish Cook 🧑🏻‍🍳...")
+    submit = st.button("Analyze Waste ♻️")
 
     # Display the typing indicator while waiting for the response
     if submit:
