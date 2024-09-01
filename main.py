@@ -43,7 +43,7 @@ pg = st.navigation(
 # --- SHARED ON ALL PAGES ---
 st.sidebar.markdown(
     '''
-    Created by Aadish ✨
+    Created by Aadish ✨<br>
     <img src="https://img.shields.io/badge/EcoSnap-%F0%9F%8C%BF-32CD32?labelColor=2F4F4F" alt="EcoSnap">
     </a>
     ''', unsafe_allow_html=True
