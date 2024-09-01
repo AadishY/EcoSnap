@@ -10,7 +10,7 @@ st.markdown("<br>", unsafe_allow_html=True)
 st.markdown(
     """
     <div style="text-align: center;">
-        <img src="https://raw.githubusercontent.com/AadishY/EcoSnap/main/Logo/Squarecorner.png" width="700">
+        <img src="https://cdn.jsdelivr.net/gh/AadishY/EcoSnap@main/Logo/Squarecorner.png" width="700">
     </div>
     """,
     unsafe_allow_html=True
