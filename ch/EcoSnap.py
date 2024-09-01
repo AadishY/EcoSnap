@@ -86,8 +86,9 @@ def get_gemini_response(prompt, image, key_index=0):
             return None
 
 # Initialize the Streamlit app
-st.header("EcoSnap")
-
+st.markdown("<h1 style='color: #4CAF50;'>📸 EcoSnap</h1>", unsafe_allow_html=True)
+st.markdown("🌿 **EcoSnap**: An AI-powered waste classification tool.<br>📸 Upload an image of your waste or enter its name, then press Enter to see how to dispose it correctly!", unsafe_allow_html=True)
+st.write("---")
 # Apply custom CSS to adjust the input box and file uploader height and width
 # Apply custom CSS to adjust the input box and file uploader height and width
 st.markdown(
