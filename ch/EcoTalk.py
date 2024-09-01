@@ -26,7 +26,9 @@ def clear_chat():
     st.session_state.chat_history = []  # Clear chat history
 
 # Streamlit page title
-st.title("EcoTalk")
+st.markdown("<h1 style='color: orange;'>🗨️ EcoTalk</h1>", unsafe_allow_html=True)
+st.markdown("💬 **EcoTalk**: Your AI assistant for sustainable living.<br>🗣️ Ask questions about waste management, recycling tips, or sustainable practices, and get instant, helpful responses!", unsafe_allow_html=True)
+st.write("---")
 
 # Display chat history
 if st.session_state.chat_history:
