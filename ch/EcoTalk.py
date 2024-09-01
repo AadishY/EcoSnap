@@ -72,7 +72,7 @@ if user_prompt:
         response = client.chat.completions.create(
             model=model,
             temperature=1,
-            max_tokens=8000,
+            max_tokens=1000,
             top_p=1,
             messages=messages
         )
