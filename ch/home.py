@@ -38,15 +38,15 @@ st.markdown("""
 
 **EcoSnap** is an AI-powered go-to tool for waste disposal, utilizing cutting-edge image recognition technology to identify waste types and assist in effective waste management. Our mission is to promote healthy practices for a cleaner environment. EcoSnap offers a range of innovative features to simplify waste management and spread waste awareness:
 
-#### Features 🌿
+### Features 🌿
 
-### **EcoSnap** 📸
+#### **EcoSnap** 📸
 **Snap a picture of any waste item**, and EcoSnap will identify it and provide detailed information about the waste. You'll also receive step-by-step instructions on how to dispose of it properly.
 
-### **EcoAlt** 🌱
+#### **EcoAlt** 🌱
 **Discover eco-friendly alternatives** to your everyday products. EcoAlt helps you make choices that are not only healthier but also reduce your carbon footprint, contributing to a sustainable lifestyle.
 
-### **EcoTalk** 💬
+#### **EcoTalk** 💬
 **Chat with our AI bot** to gain insights into waste management, recycling, and sustainable practices. EcoTalk is here to answer all your questions and raise awareness about environmental issues.
 
 ---
