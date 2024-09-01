@@ -77,7 +77,7 @@ Working alongside Aadish, I focus on enhancing the functionality and user experi
 #### **Our Project** 🚀  
 We created EcoSnap for the Sustainable Innovators competition, aiming to deliver a user-friendly application that encourages green choices. We are enthusiastic about making a positive environmental impact and inviting others to join us in our mission. 🌿
 
-For more details about our projects and collaborations, you can visit my <a href="https://github.com/AadishY">
+For more details about our projects or contacting with us, you can visit my <a href="https://github.com/AadishY">
     <img src="https://img.shields.io/badge/Github-Profile-green" alt="GitHub">
 </a>
 
