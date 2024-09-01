@@ -49,9 +49,8 @@ st.markdown("""
 #### **EcoTalk** 💬
 **Chat with our AI bot** to gain insights into waste management, recycling, and sustainable practices. EcoTalk is here to answer all your questions and raise awareness about environmental issues.
 
----
-
 🌟 **Join us in our mission to foster environmental awareness and offer practical solutions for a greener, healthier future. Together, we can make a difference!** 🌟
+---
 """, unsafe_allow_html=True)
 
 
