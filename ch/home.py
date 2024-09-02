@@ -62,7 +62,7 @@ if st.button("Go to EcoAlt 🌱"):
     st.switch_page("ch/EcoAlt.py")
 
 if st.button("Go to EcoTalk 🗣️"):
-    st.switch_page("ch.EcoTalk.py")
+    st.switch_page("ch/EcoTalk.py")
 
 st.write("---")
 # About Us Section
