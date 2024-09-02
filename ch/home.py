@@ -69,17 +69,11 @@ st.write("---")
 st.markdown("<h2 style='color: #4682b4;'>About Us</h2>", unsafe_allow_html=True)
 
 st.markdown("""
-#### **Aadish Kumar Yadav** 🌟  
-<img src="https://i.pinimg.com/originals/ec/5f/37/ec5f377a267f9e999a5f4b13bd0fb102.gif" 
-             style="border-radius: 50%; width: 200px; height: 200px; object-fit: cover;" />
-              <br>
+#### **Aadish Kumar Yadav** 🌟  <br>
 Hello! I am **Aadish Kumar Yadav**, a Class 11th Science student at Red Rose Public School, Lucknow, India. My passion for technology and sustainability led me to develop **EcoSnap**. 🌱<br>
 As the main developer, I believe that every small action can contribute to a significant change. By harnessing technology, my goal is to simplify the process of making eco-friendly decisions and foster a more sustainable lifestyle.
 
-#### **Aditya Sameer Pandey** 🌟
-<img src="https://raw.githubusercontent.com/AadishY/EcoSnap/main/Logo/Screenshot%202024-08-31%20191741.png" 
-             style="border-radius: 50%; width: 200px; height: 200px; object-fit: cover;" />
-              <br>
+#### **Aditya Sameer Pandey** 🌟 <br>
 I am **Aditya Sameer Pandey**, also a Class 11th Science student at Red Rose Public School, Lucknow. My dedication to sustainability and technology drives my work on **EcoSnap**. 🌍<br>
 Working alongside Aadish, I focus on enhancing the functionality and user experience of EcoSnap. Our joint efforts aim to promote sustainable practices and inspire positive environmental actions.
 
