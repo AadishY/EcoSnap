@@ -138,7 +138,7 @@ with st.container():
     with col1:
         uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"], key="image_upload", label_visibility="collapsed")
     with col2:
-        input_text = st.text_area("Input Prompt (Garbage Name):", key="input", label_visibility="collapsed", placeholder="Enter garbage name here...")
+        input_text = st.text_area("Input Prompt (Garbage Name):", key="input", label_visibility="collapsed", placeholder="Enter garbage name here (Optional)...")
 
 # Prepare the prompt
 prompt = f"""
